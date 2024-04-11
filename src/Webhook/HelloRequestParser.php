@@ -2,6 +2,7 @@
 
 namespace Xaraya\SymfonyApp\Webhook;
 
+use JsonException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +19,23 @@ class HelloRequestParser implements RequestParserInterface
             throw new RejectWebhookException('Invalid hello request.');
         }
         // Convert the request into a RemoteEvent object
-        $name = $request->get('name', 'world');
         $type = 'hello';
-        $data = $request->getContent();
-        $eventData = json_decode($data, true, 10, JSON_THROW_ON_ERROR) ?? [];
-        $eventData[$type] ??= rawurlencode($name);
         $id = bin2hex(random_bytes(16));
+        $data = $request->getContent();
+        if (in_array($request->getMethod(), ['GET', 'HEAD']) && empty($data)) {
+            $eventData = [];
+        } else {
+            try {
+                $eventData = json_decode($data, true, 10, JSON_THROW_ON_ERROR) ?? [];
+            } catch (JsonException $e) {
+                $eventData = [
+                    'payload_size' => strlen($data),
+                    'json_error' => $e->getMessage(),
+                ];
+            }
+        }
+        $name = $request->get('name', 'world');
+        $eventData[$type] ??= rawurlencode($name);
         $remoteEvent = new RemoteEvent($type, $id, $eventData);
         return $remoteEvent;
     }
