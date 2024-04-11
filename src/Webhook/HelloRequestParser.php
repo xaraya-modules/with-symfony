@@ -18,12 +18,13 @@ class HelloRequestParser implements RequestParserInterface
             throw new RejectWebhookException('Invalid hello request.');
         }
         // Convert the request into a RemoteEvent object
+        $name = $request->get('name', 'world');
+        $type = 'hello';
         $data = $request->getContent();
-        $eventData = json_decode($data, true) ?? [];
-        $eventData['hello'] ??= 'world';
-        $name = 'hello';
+        $eventData = json_decode($data, true, 10, JSON_THROW_ON_ERROR) ?? [];
+        $eventData[$type] ??= rawurlencode($name);
         $id = bin2hex(random_bytes(16));
-        $remoteEvent = new RemoteEvent($name, $id, $eventData);
+        $remoteEvent = new RemoteEvent($type, $id, $eventData);
         return $remoteEvent;
     }
 

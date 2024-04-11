@@ -17,8 +17,10 @@ class HelloWebhookListener implements ConsumerInterface
         $id = $event->getId();
         $payload = $event->getPayload();
         // with the default (sync) messagebus, we could even echo it back...
-        //$message = "Event $name ($id):\n" . json_encode($payload, JSON_PRETTY_PRINT);
-        //$response = new Response($message, 200, ['Content-Type' => 'text/plain']);
-        //$response->send();
+        if (!empty($_ENV['APP_WEBHOOK_ECHO'])) {
+            $message = "Event $name ($id):\n" . json_encode($payload, JSON_PRETTY_PRINT);
+            $response = new Response($message, 200, ['Content-Type' => 'text/plain']);
+            $response->send();
+        }
     }
 }
