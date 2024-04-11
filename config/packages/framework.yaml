@@ -10,7 +10,7 @@ framework:
     webhook:
         routing:
             hello:
-                service: 'App\Webhook\HelloRequestParser'
+                service: 'Xaraya\SymfonyApp\Webhook\HelloRequestParser'
                 secret: none
 
     #esi: true

@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Xaraya\\SymfonyApp\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Xaraya\\SymfonyApp\\Tests\\": "tests/"
         }
     },
     "replace": {

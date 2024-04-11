@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Webhook;
+namespace Xaraya\SymfonyApp\Webhook;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;

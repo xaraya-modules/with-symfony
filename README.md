@@ -2,6 +2,8 @@
 
 This is a basic [Symfony Framework](https://symfony.com/doc/current/setup.html) application with a [Webhook](https://symfony.com/doc/current/webhook.html) request parser and matching [Remote Event](https://symfony.com/components/RemoteEvent) webhook listener
 
+Note: the **namespace** was changed from `App\` to `Xaraya\SymfonyApp\` to avoid conflicts on loading with third party frameworks
+
 To handle /webhook/`hello` requests:
 1. src/Webhook/: `hello` [request parser](./src/Webhook/HelloRequestParser.php)
 2. src/RemoteEvent/: `hello` [webhook listener](./src/RemoteEvent/HelloWebhookListener.php)

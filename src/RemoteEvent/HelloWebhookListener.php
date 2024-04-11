@@ -1,6 +1,6 @@
 <?php
 
-namespace App\RemoteEvent;
+namespace Xaraya\SymfonyApp\RemoteEvent;
 
 use Symfony\Component\RemoteEvent\Attribute\AsRemoteEventConsumer;
 use Symfony\Component\RemoteEvent\Consumer\ConsumerInterface;
