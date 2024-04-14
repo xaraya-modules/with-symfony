@@ -34,8 +34,9 @@ class HelloRequestParser implements RequestParserInterface
                 ];
             }
         }
-        $name = $request->get('name', 'world');
+        $name = $request->get('name', 'symfony');
         $eventData[$type] ??= rawurlencode($name);
+        $eventData['method'] ??= $request->getMethod();
         $remoteEvent = new RemoteEvent($type, $id, $eventData);
         return $remoteEvent;
     }

@@ -4,9 +4,9 @@ This is a basic [Symfony Framework](https://symfony.com/doc/current/setup.html) 
 
 Note: the **namespace** was changed from `App\` to `Xaraya\SymfonyApp\` to avoid conflicts on loading with third party frameworks
 
-To handle /webhook/`hello` requests:
-1. src/Webhook/: `hello` [request parser](./src/Webhook/HelloRequestParser.php)
-2. src/RemoteEvent/: `hello` [webhook listener](./src/RemoteEvent/HelloWebhookListener.php)
-3. config/packages/framework.yaml: `hello` [webhook routing](./config/packages/framework.yaml)
+To handle `/webhook/hello-symfony` requests:
+1. src/Webhook/: `hello-symfony` [request parser](./src/Webhook/HelloRequestParser.php)
+2. src/RemoteEvent/: `hello-symfony` [webhook listener](./src/RemoteEvent/HelloWebhookListener.php)
+3. config/packages/framework.yaml: `hello-symfony` [webhook routing](./config/packages/framework.yaml)
 
 You could use one of the Symfony [Mailer](https://symfony.com/doc/current/mailer.html) or [Notifier](https://symfony.com/doc/current/notifier.html) packages and bundles as consumer, switch to [async/queued messages](https://symfony.com/doc/current/messenger.html#transports-async-queued-messages) with retries etc.

@@ -7,7 +7,7 @@ use Symfony\Component\RemoteEvent\Consumer\ConsumerInterface;
 use Symfony\Component\RemoteEvent\RemoteEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsRemoteEventConsumer('hello')]
+#[AsRemoteEventConsumer('hello-symfony')]
 class HelloWebhookListener implements ConsumerInterface
 {
     public function consume(RemoteEvent $event): void
