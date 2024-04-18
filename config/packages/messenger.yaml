@@ -12,7 +12,7 @@ framework:
         routing:
             # Route your messages to the transports
             # 'Xaraya\SymfonyApp\Message\YourMessage': async
-            # 'Symfony\Component\RemoteEvent\Messenger\ConsumeRemoteEventMessage': async
+            'Symfony\Component\RemoteEvent\Messenger\ConsumeRemoteEventMessage': async
 
 # when@test:
 #    framework:
