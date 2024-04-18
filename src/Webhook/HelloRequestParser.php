@@ -12,6 +12,8 @@ use Symfony\Component\Webhook\Client\RequestParserInterface;
 
 class HelloRequestParser implements RequestParserInterface
 {
+    private RemoteEvent $echoEvent;
+
     public function parse(Request $request, string $secret): ?RemoteEvent
     {
         // Validate the request from Stripe
@@ -38,6 +40,10 @@ class HelloRequestParser implements RequestParserInterface
         $eventData[$type] ??= rawurlencode($name);
         $eventData['method'] ??= $request->getMethod();
         $remoteEvent = new RemoteEvent($type, $id, $eventData);
+        // we could even echo it back in response...
+        if (!empty($_ENV['APP_WEBHOOK_ECHO'])) {
+            $this->echoEvent = $remoteEvent;
+        }
         return $remoteEvent;
     }
 
@@ -50,6 +56,14 @@ class HelloRequestParser implements RequestParserInterface
 
     public function createSuccessfulResponse(): Response
     {
+        // we could even echo it back in response...
+        if (!empty($_ENV['APP_WEBHOOK_ECHO'])) {
+            $name = $this->echoEvent->getName();
+            $id = $this->echoEvent->getId();
+            $payload = $this->echoEvent->getPayload();
+            $message = "Received Event $name ($id):\n" . json_encode($payload, JSON_PRETTY_PRINT) . "\n";
+            return new Response($message, 200, ['Content-Type' => 'text/plain']);
+        }
         return new Response('', 202);
     }
 

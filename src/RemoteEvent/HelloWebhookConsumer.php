@@ -5,7 +5,6 @@ namespace Xaraya\SymfonyApp\RemoteEvent;
 use Symfony\Component\RemoteEvent\Attribute\AsRemoteEventConsumer;
 use Symfony\Component\RemoteEvent\Consumer\ConsumerInterface;
 use Symfony\Component\RemoteEvent\RemoteEvent;
-use Symfony\Component\HttpFoundation\Response;
 
 #[AsRemoteEventConsumer('hello-symfony')]
 class HelloWebhookConsumer implements ConsumerInterface
@@ -18,9 +17,8 @@ class HelloWebhookConsumer implements ConsumerInterface
         $payload = $event->getPayload();
         // with the default (sync) messagebus, we could even echo it back...
         if (!empty($_ENV['APP_WEBHOOK_ECHO'])) {
-            $message = "Event $name ($id):\n" . json_encode($payload, JSON_PRETTY_PRINT);
-            $response = new Response($message, 200, ['Content-Type' => 'text/plain']);
-            $response->send();
+            $message = "Consumed Event $name ($id):\n" . json_encode($payload, JSON_PRETTY_PRINT) . "\n";
+            echo $message;
         }
     }
 }
