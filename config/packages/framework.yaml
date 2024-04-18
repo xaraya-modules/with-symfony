@@ -6,13 +6,6 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
-    # TODO: add routing to the right webhook request parser(s) and optional secret
-    webhook:
-        routing:
-            hello-symfony:
-                service: 'Xaraya\SymfonyApp\Webhook\HelloRequestParser'
-                secret: none
-
     #esi: true
     #fragments: true
 

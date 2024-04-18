@@ -1,0 +1,7 @@
+framework:
+  # TODO: add routing to the right webhook request parser(s) and optional secret
+  webhook:
+    routing:
+      hello-symfony:
+        service: 'Xaraya\SymfonyApp\Webhook\HelloRequestParser'
+        secret: none
