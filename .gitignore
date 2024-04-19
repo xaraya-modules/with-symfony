@@ -10,3 +10,4 @@
 ###< symfony/framework-bundle ###
 /var/*
 !/var/data.db
+.php-cs-fixer.cache
