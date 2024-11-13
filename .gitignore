@@ -11,3 +11,4 @@
 /var/*
 !/var/data.db
 .php-cs-fixer.cache
+composer.lock
