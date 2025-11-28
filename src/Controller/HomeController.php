@@ -17,6 +17,7 @@ class HomeController extends AbstractController
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/HomeController.php',
             'app_count' => $this->generateUrl('app_count'),
+            '_webhook_controller' => $this->generateUrl('_webhook_controller', ['type' => 'hello-symfony']),
         ]);
     }
 
