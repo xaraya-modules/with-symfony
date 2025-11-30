@@ -35,7 +35,7 @@ class HelloRequestParser implements RequestParserInterface
                 ];
             }
         }
-        $name = $request->get('name', 'symfony');
+        $name = $request->query->get('name', 'symfony');
         $eventData[$type] ??= rawurlencode($name);
         $eventData['method'] ??= $request->getMethod();
         $remoteEvent = new RemoteEvent($type, $id, $eventData);
@@ -53,7 +53,7 @@ class HelloRequestParser implements RequestParserInterface
         return true;
     }
 
-    public function createSuccessfulResponse(): Response
+    public function createSuccessfulResponse(?Request $request = null): Response
     {
         // we could even echo it back in response...
         if (!empty($_ENV['APP_WEBHOOK_ECHO'])) {
@@ -66,7 +66,7 @@ class HelloRequestParser implements RequestParserInterface
         return new Response('', 202);
     }
 
-    public function createRejectedResponse(string $reason): Response
+    public function createRejectedResponse(string $reason, ?Request $request = null): Response
     {
         return new Response($reason, 406);
     }
